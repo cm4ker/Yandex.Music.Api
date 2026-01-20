@@ -51,21 +51,7 @@ namespace Yandex.Music.Api.Common.Providers
 
         public override Task<HttpResponseMessage> GetWebResponseAsync(HttpRequestMessage message)
         {
-            try
-            {
-                HttpClient client = new(new SocketsHttpHandler {
-                    Proxy = storage.Context.WebProxy,
-                    AutomaticDecompression = DecompressionMethods.GZip,
-                    UseCookies = true,
-                    CookieContainer = storage.Context.Cookies,
-                });
-
-                return client.SendAsync(message);
-            }
-            catch (Exception ex)
-            {
-                throw ProcessException(ex);
-            }
+            return GetWebResponseAsync(message, HttpCompletionOption.ResponseContentRead);
         }
 
         public override Task<HttpResponseMessage> GetWebResponseAsync(HttpRequestMessage message, HttpCompletionOption completionOption)
