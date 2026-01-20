@@ -16,6 +16,14 @@ namespace Yandex.Music.Api.Common.Providers
         Task<HttpResponseMessage> GetWebResponseAsync(HttpRequestMessage message);
 
         /// <summary>
+        /// Функция получения ответа с опциями завершения
+        /// </summary>
+        /// <param name="message">Запрос</param>
+        /// <param name="completionOption">Опция завершения запроса</param>
+        /// <returns></returns>
+        Task<HttpResponseMessage> GetWebResponseAsync(HttpRequestMessage message, HttpCompletionOption completionOption);
+
+        /// <summary>
         /// Функция формирования ответа
         /// </summary>
         /// <typeparam name="T">Тип объекта с ответом</typeparam>
