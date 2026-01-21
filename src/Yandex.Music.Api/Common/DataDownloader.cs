@@ -16,7 +16,7 @@ namespace Yandex.Music.Api.Common
         {
             HttpRequestMessage message = new(new HttpMethod(WebRequestMethods.Http.Get), url);
 
-            HttpResponseMessage response = await authStorage.Provider.GetWebResponseAsync(message);
+            HttpResponseMessage response = await authStorage.Provider.GetWebResponseAsync(message, HttpCompletionOption.ResponseHeadersRead);
             return response.Content;
         }
 
