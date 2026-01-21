@@ -121,16 +121,10 @@ namespace Yandex.Music.Api.API
         /// <returns></returns>
         public async Task<string> GetFileLinkAsync(AuthStorage storage, string trackKey)
         {
-            YResponse<List<YTrackDownloadInfo>> meta = await GetMetadataForDownloadAsync(storage, trackKey, direct: true);
+            YResponse<List<YTrackDownloadInfo>> meta = await GetMetadataForDownloadAsync(storage, trackKey);
             YTrackDownloadInfo info = meta.Result
                 .OrderByDescending(i => i.BitrateInKbps)
                 .First(m => m.Codec == "mp3");
-            
-            if (!string.IsNullOrEmpty(info.DirectLink))
-            {
-                return info.DirectLink;
-            }
-            
             YStorageDownloadFile storageDownload = await GetDownloadFileInfoAsync(storage, info);
             return BuildLinkForDownload(info, storageDownload);
         }
